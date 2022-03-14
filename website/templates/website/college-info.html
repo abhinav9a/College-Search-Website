@@ -1,0 +1,192 @@
+{% extends 'base.html' %} {% load static %} {% block css_files %}
+<link rel="stylesheet" href="{% static 'website/css/college-info.css' %}" />
+
+{% endblock css_files %} {% block content %}
+
+<div class="container-fluid padding">
+  <div class="college-info row">
+    <div class="college-logo col-md-1">
+      <img
+        src="{% static 'website/images/logo.png' %}"
+        alt="{{ college.name }}"
+      />
+    </div>
+    <div class="college-details text-center col-md">
+      <h3>{{ college.name }}</h3>
+      <p>
+        <i class="fas fa-map-marker-alt fa-sm"></i> {{ college.city}},
+        {{college.state }}
+      </p>
+      <br />
+      <ul>
+        <i class="far fa-calendar-alt"></i>
+        <li class="mr-2">Established in: {{ college.established_in }}</li>
+        <i class="fas fa-tag fa-xs"></i>
+        <li class="mr-2">Type: {{ college.college_type}}</li>
+        <i class="fas fa-medal fa-xs"></i>
+        <li>Approved By: {{ college.approved_by }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <br />
+  <br />
+</div>
+<ul class="collegeDetailsLink text-center">
+  <li class="active"><a href="#overview">Overview</a></li>
+  <li><a href="#courses-offered">Courses</a></li>
+  <li><a href="#reviews">Reviews</a></li>
+  <li><a href="">Campus</a></li>
+  <li><a href="">Cut off</a></li>
+</ul>
+
+<div class="container box" id="overview">
+  <h3>Overview</h3>
+  <div class="border"></div>
+  {{ college.summary|linebreaks}}
+</div>
+
+<div class="container box">
+  <h3>College Facilities</h3>
+  <div class="border"></div>
+  <div class="row">
+    {% for facility in facilities %}
+      <div class="col-auto  p-3 m-3">
+        <div class="facility-icons {{facility|slugify}}"></div>
+        <div>{{ facility }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="container box" id="courses-offered">
+  <h3>Courses Offered</h3>
+  <div class="border"></div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <th>Course</th>
+        <th>Course Type</th>
+        <th>Study Mode</th>
+        <th>Fees</th>
+        <th>Duration</th>
+      </thead>
+
+      <tbody>
+        {% for course in courses %}
+        <tr>
+          <td>{{ course.name }}</td>
+          <td>
+            {% if course.type is not None %}{{ course.type|title }}{% endif %}
+          </td>
+          <td>
+            {% if course.mode is not None %}{{ course.mode|title }}{% endif %}
+          </td>
+          <td>{% if course.fees is not None %}{{ course.fees }}{% endif %}</td>
+          <td>
+            {% if course.duration is not None %}{{ course.duration }}
+            yrs.{%endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="container box" id="reviews">
+  <h3>Reviews</h3>
+  <div class="border"></div>
+
+  {% for review in reviews %}
+    <div class="review-data">
+      <h3>{{ review.user.name }}</h3>
+
+      <h5 class="star-rating"></h5>
+
+      <div>{{ review.published_on|date:'M d, Y' }}</div>
+      <p>{{ review.comment }}</p>
+      <hr />
+    </div>
+  {% endfor %}
+
+  {% if reviews.has_other_pages %}
+    <ul class="pagination">
+      {% if reviews.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ reviews.previous_page_number }}#reviews">&laquo;</a></li>
+      {% else %}
+        <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+      {% endif %}
+
+      {% for i in reviews.paginator.page_range %}
+        {% if reviews.number == i %}
+          <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ i }}#reviews">{{ i }}</a></li>
+        {% endif %}
+      {% endfor %}
+
+      {% if reviews.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ reviews.next_page_number }}#reviews">&raquo;</a></li>
+      {% else %}
+        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+      {% endif %}
+    </ul>
+  {% endif %}
+</div>
+
+<div class="container box" id="post-reviews">
+  <h3>Post Reviews</h3>
+  <div class="border"></div>
+  {% if user.is_authenticated %}
+  <form action="{% url 'college_info' slug=college.slug %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_ratings">{{ review_form.ratings.label }}:</label>
+      {{ review_form.ratings.errors}} {{ review_form.ratings }}
+    </div>
+    <div class="form-group">
+      <label for="id_comment">{{ review_form.comment.label }}:</label><br />
+      {{ review_form.comment }} {{ review_form.comment.errors}}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  {% else %}
+  <h1>Please Login To Post Reviews</h1>
+  {% endif %}
+</div>
+
+<div class="container box" id="campus">
+  <h3>Campus</h3>
+  <div class="border"></div>
+</div>
+
+
+
+<script>
+  var max = 5; // maximum rating
+  var review_count = 0
+
+  {% for review in reviews %}
+    rating = {{ review.ratings }}
+    var starHTML = "";
+    var rating = parseInt(rating);
+    var increment = 0;
+
+    while (increment < rating) {
+        starHTML += '<i class="fas fa-star orange"></i>';
+        increment++;
+    }
+    while (increment < max) {
+        starHTML += '<i class="far fa-star gray"></i>';
+        increment++;
+    }
+    document.getElementsByClassName('star-rating')[review_count].innerHTML += starHTML;
+    review_count++;
+  {% endfor %}
+</script>
+{% endblock content %}

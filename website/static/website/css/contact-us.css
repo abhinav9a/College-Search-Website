@@ -1,0 +1,71 @@
+/* .contact-us-section {
+    padding-top: 3rem;
+    background-image: url("../images/contact-us.jpg");
+} */
+
+.contact-us-banner {
+  height: 20rem;
+  background-image: url("../images/contact-us.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.contact-wrap {
+  background: #fff;
+}
+
+.info-wrap {
+  background-color: #202040;
+}
+
+.info-wrap h3 {
+  color: #fff;
+}
+
+.info-wrap .dbox {
+  width: 100%;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 25px;
+}
+.info-wrap .dbox:last-child {
+  margin-bottom: 0;
+}
+.info-wrap .dbox p {
+  margin-bottom: 0;
+}
+.info-wrap .dbox p span {
+  font-weight: 600;
+  color: white;
+}
+.info-wrap .dbox p a {
+  color: white;
+}
+.info-wrap .dbox .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+.info-wrap .dbox .icon span {
+  font-size: 20px;
+  color: white;
+}
+.info-wrap .dbox .text {
+  width: calc(100% - 50px);
+}
+
+@media (min-width: 992px) {
+  .info-wrap {
+    margin-top: -20px;
+    margin-bottom: -20px;
+    border-radius: 5px;
+  }
+}
+
+.wrapper > .row {
+  justify-content: space-between;
+  background-color: white;
+  filter: drop-shadow(2px 4px 6px black);
+}

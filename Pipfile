@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+pillow = "*"
+django-multiselectfield = "*"
+django-heroku = "*"
+whitenoise = "*"
+gunicorn = "*"
+django-allauth = "*"
+django-jazzmin = "*"
+django-ckeditor = "*"
+redis = "*"
+celery = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

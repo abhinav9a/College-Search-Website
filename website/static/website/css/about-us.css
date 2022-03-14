@@ -1,0 +1,25 @@
+.about-us-banner {
+  height: 20rem;
+  background-image: url("../images/about-us.jpg");
+  background-attachment: fixed;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.border {
+  width: 10rem;
+  height: 5px;
+  background-color: aquamarine;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box {
+  filter: drop-shadow(2px 4px 6px #202040);
+  border-radius: 1rem;
+  background-color: white;
+  padding: 1rem;
+  margin: 2rem auto;
+}

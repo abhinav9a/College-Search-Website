@@ -1,0 +1,348 @@
+{% extends 'base.html' %} {% load static %} {% block css_files %}
+<link rel="stylesheet" href="{% static 'website/css/compare-college.css' %}" />
+<style></style>
+{% endblock css_files %} {% block content %}
+
+<div class="container pt-5">
+  <h1 class="text-center pb-5">Compare colleges</h1>
+
+  <div class="college-compare-data">
+    <div class="table-responsive">
+      <table class="table college-compare-data-table">
+        <tbody>
+          <tr>
+            <td></td>
+            <td>
+              <div class="coll-search">
+                <button
+                  id="college_one"
+                  class="btn btn-lg"
+                  data-toggle="modal"
+                  data-target="#add_college"
+                >
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+                  College
+                </button>
+              </div>
+            </td>
+            <td>
+              <div class="coll-search">
+                <button
+                  id="college_two"
+                  class="btn btn-lg"
+                  data-toggle="modal"
+                  data-target="#add_college"
+                >
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+                  College
+                </button>
+              </div>
+            </td>
+            <td>
+              <div class="coll-search">
+                <button
+                  id="college_three"
+                  class="btn btn-lg"
+                  data-toggle="modal"
+                  data-target="#add_college"
+                >
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+                  College
+                </button>
+              </div>
+            </td>
+            <td>
+              <div class="coll-search">
+                <button
+                  id="college_four"
+                  class="btn btn-lg"
+                  data-toggle="modal"
+                  data-target="#add_college"
+                >
+                  <i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+                  College
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="college-ranking">
+      <div class="heading">College Rankings</div>
+      <div class="row">
+        <div class="col parameters">College Rankings</div>
+        <div class="col">{{college_one.college_ranking}}</div>
+        <div class="col">{{college_two.college_ranking}}</div>
+        <div class="col">{{college_three.college_ranking}}</div>
+        <div class="col">{{college_four.college_ranking}}</div>
+      </div>
+    </div>
+    <div class="college-details">
+      <div class="heading">College Details</div>
+      <div class="row">
+        <div class="col parameters">City</div>
+        <div class="col">{{college_one.city}}</div>
+        <div class="col">{{college_two.city}}</div>
+        <div class="col">{{college_three.city}}</div>
+        <div class="col">{{college_four.city}}</div>
+      </div>
+      <div class="row">
+        <div class="col parameters">State</div>
+        <div class="col">{{college_one.state}}</div>
+        <div class="col">{{college_two.state}}</div>
+        <div class="col">{{college_three.state}}</div>
+        <div class="col">{{college_four.state}}</div>
+      </div>
+      <div class="row">
+        <div class="col parameters">Established In</div>
+        <div class="col">{{college_one.established_in}}</div>
+        <div class="col">{{college_two.established_in}}</div>
+        <div class="col">{{college_three.established_in}}</div>
+        <div class="col">{{college_four.established_in}}</div>
+      </div>
+      <div class="row">
+        <div class="col parameters">College Type</div>
+        <div class="col">{{college_one.college_type}}</div>
+        <div class="col">{{college_two.college_type}}</div>
+        <div class="col">{{college_three.college_type}}</div>
+        <div class="col">{{college_four.college_type}}</div>
+      </div>
+      <div class="row">
+        <div class="col parameters">Approved By</div>
+        <div class="col">{{college_one.approved_by}}</div>
+        <div class="col">{{college_two.approved_by}}</div>
+        <div class="col">{{college_three.approved_by}}</div>
+        <div class="col">{{college_four.approved_by}}</div>
+      </div>
+      <div class="row">
+        <div class="col parameters">Programs Offered</div>
+        <div class="col">
+          {% for stream in college_one.stream.all %}
+            {{stream}}<br />
+          {% endfor %}
+        </div>
+        <div class="col">
+          {% for stream in college_two.stream.all %}
+            {{stream}}<br />
+          {% endfor %}
+        </div>
+        <div class="col">
+          {% for stream in college_three.stream.all %}
+            {{stream}}<br />
+          {% endfor %}
+        </div>
+        <div class="col">
+          {% for stream in college_four.stream.all %}
+            {{stream}}<br />
+          {% endfor %}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col parameters">Campus Size</div>
+        <div class="col">{{college_one.campus_size}}</div>
+        <div class="col">{{college_two.campus_size}}</div>
+        <div class="col">{{college_three.campus_size}}</div>
+        <div class="col">{{college_four.campus_size}}</div>
+      </div>
+      <div class="row">
+        <div class="col parameters">Student Intake</div>
+        <div class="col">{{college_one.student_intake}}</div>
+        <div class="col">{{college_two.student_intake}}</div>
+        <div class="col">{{college_three.student_intake}}</div>
+        <div class="col">{{college_four.student_intake}}</div>
+      </div>
+      <div class="row">
+        <div class="col parameters">Total Courses</div>
+        <div class="col">{% if college_one.courses.all.count == 0 %}-{% else %}{{college_one.courses.all.count}}{% endif %}</div>
+        <div class="col">{% if college_two.courses.all.count == 0 %}-{% else %}{{college_two.courses.all.count}}{% endif %}</div>
+        <div class="col">{% if college_three.courses.all.count == 0 %}-{% else %}{{college_three.courses.all.count}}{% endif %}</div>
+        <div class="col">{% if college_four.courses.all.count == 0 %}-{% else %}{{college_four.courses.all.count}}{% endif %}</div>
+      </div>
+    </div>
+
+    <div class="college-facilities">
+      <div class="heading">College Facilities</div>
+      {% for facility in college_facilities %}
+      <div class="row">
+        <div class="col parameters">{{facility}}</div>
+        <div class="col">
+          {% for x in college_one.facilities.all %}
+            {% if x == facility %}Yes{% endif %}
+          {% endfor %}
+        </div>
+        <div class="col">
+          {% for x in college_two.facilities.all %}
+            {% if x == facility %}Yes{% endif %}
+          {% endfor %}
+        </div>
+        <div class="col">
+          {% for x in college_three.facilities.all %}
+           {% if x == facility %}Yes{% endif %}
+          {% endfor %}
+        </div>
+        <div class="col">
+          {% for x in college_four.facilities.all %}
+           {% if x == facility %}Yes{% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    <div class="courses offered">
+      <div class="heading">Courses Offered</div>
+      <div class="row">
+        <div class="col parameters">Courses</div>
+        <div class="col">
+          {% for course in college_one.courses.all %}
+            {{course}}<br />
+          {% endfor %}
+        </div>
+        <div class="col">
+          {% for course in college_two.courses.all %}
+            {{course}}<br />
+          {% endfor %}
+        </div>
+        <div class="col">
+          {% for course in college_three.courses.all %}
+            {{course}}<br />
+          {% endfor %}
+        </div>
+        <div class="col">
+          {% for course in college_four.courses.all %}
+            {{course}}<br />
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="student-reviews">
+      <div class="heading">Student Reviews</div>
+      <div class="row">
+        <div class="col parameters">Reviews</div>
+        <div class="col">
+          {% if college_one.avg_rating %}
+          <p class="pt-2 pl-5">{{college_one.avg_rating}} / 5</p>
+          <span class="stars pb-5">{{college_one.avg_rating}}</span>
+          {% endif %}
+        </div>
+        <div class="col">
+          {% if college_two.avg_rating %}
+          <p class="pt-2 pl-5">{{college_two.avg_rating}} / 5</p>
+          <span class="stars pb-5">{{college_two.avg_rating}}</span>
+          {% endif %}
+        </div>
+        <div class="col">
+          {% if college_three.avg_rating %}
+          <p class="pt-2 pl-5">{{college_three.avg_rating}} / 5</p>
+          <span class="stars pb-5">{{college_three.avg_rating}}</span>
+          {% endif %}
+        </div>
+        <div class="col">
+          {% if college_four.avg_rating %}
+          <p class="pt-2 pl-5">{{college_four.avg_rating}} / 5</p>
+          <span class="stars pb-5">{{college_four.avg_rating}}</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="0" id="add_college" role="dialog">
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Compare College</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group">
+              <input
+                onkeyup="suggestions()"
+                id="select_college"
+                type="text"
+                class="form-control"
+                placeholder="Type the name of the college"
+              />
+            </div>
+            <div>
+              <ul id="autocomplete"></ul>
+            </div>
+          </div>
+        </div>
+        <!-- </modal body -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %} {% block script_files %}
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="{% static 'website/js/compare-colleges.js' %}"></script>
+
+<script>
+  url = window.location.search;
+  const url_params = new URLSearchParams(url);
+
+  var college_one = url_params.get("college_one");
+  var college_two = url_params.get("college_two");
+  var college_three = url_params.get("college_three");
+  var college_four = url_params.get("college_four");
+
+  if (college_one != null) {
+    document.getElementById("college_one").outerHTML = `
+        <div class="text-center pt-5">
+          <button type="button" class="close" onclick="closeFun(this);" data-dismiss="modal" aria-label="Close" data-count="college_one">
+            <span aria-hidden="true">×</span>
+          </button>
+          <div class="pb-3"><img src="{% static 'website/images/logo.png' %}" alt="" height="50" width="50"></div>
+          <h6>{{college_one.name}}, {{college_one.city}},<br>{{college_one.state}}</h6>
+        </div>
+        `;
+  }
+  if (college_two != null) {
+    document.getElementById("college_two").outerHTML = `
+        <div class="text-center pt-5">
+          <button type="button" class="close" onclick="closeFun(this);" data-dismiss="modal" aria-label="Close" data-count="college_two">
+            <span aria-hidden="true">×</span>
+          </button>
+          <div class="pb-3"><img src="{% static 'website/images/logo.png' %}" alt="" height="50" width="50"></div>
+          <h6>{{college_two.name}}, {{college_two.city}},<br>{{college_two.state}}</h6>
+        </div>
+        `;
+  }
+  if (college_three != null) {
+    document.getElementById("college_three").outerHTML = `
+        <div class="text-center pt-5">
+          <button type="button" class="close" onclick="closeFun(this);" data-dismiss="modal" aria-label="Close" data-count="college_three">
+            <span aria-hidden="true">×</span>
+          </button>
+          <div class="pb-3"><img src="{% static 'website/images/logo.png' %}" alt="" height="50" width="50"></div>
+          <h6>{{college_three.name}}, {{college_three.city}},<br>{{college_three.state}}</h6>
+        </div>
+        `;
+  }
+  if (college_four != null) {
+    document.getElementById("college_four").outerHTML = `
+        <div class="text-center pt-5">
+          <button type="button" class="close" onclick="closeFun(this);" data-dismiss="modal" aria-label="Close" data-count="college_four">
+            <span aria-hidden="true">×</span>
+          </button>
+          <div class="pb-3"><img src="{% static 'website/images/logo.png' %}" alt="" height="50" width="50"></div>
+          <h6>{{college_four.name}}, {{college_four.city}},<br>{{college_four.state}}</h6>
+        </div>
+        `;
+  }
+</script>
+
+{% endblock script_files %}

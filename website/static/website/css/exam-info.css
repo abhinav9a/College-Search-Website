@@ -1,0 +1,23 @@
+li {
+  list-style: none;
+  display: inline-block;
+}
+
+#content-wrap > .container-fluid.padding {
+  height: 75%;
+  background-color: rgb(4, 53, 68);
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+
+.box {
+  filter: drop-shadow(10px 10px 8px #ccc);
+  border-radius: 1rem;
+  background-color: white;
+  padding: 1rem;
+  margin: 2rem auto;
+}

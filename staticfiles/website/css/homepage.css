@@ -1,0 +1,597 @@
+/* First Content */
+#first-content {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../images/homepage-bg1.jpg");
+}
+
+.search-input-wrapper {
+  position: relative;
+}
+.search-input {
+  width: 35rem;
+  height: 3rem;
+  padding: 0 1rem;
+  border-radius: 1.5rem;
+  border: none;
+  transition: transform 0.1s ease-in-out;
+}
+::placeholder {
+  color: #a1a1a1;
+}
+.search-input:focus {
+  outline: none;
+  transform: scale(1.1);
+  transition: all 0.1s ease-in-out;
+}
+.search-inputIcon {
+  position: absolute;
+  right: 0.8rem;
+  top: 1rem;
+  color: #a1a1a1;
+  transition: all 0.1s ease-in-out;
+}
+#first-content:focus-within > .search-input-wrapper > .search-inputIcon {
+  right: -1rem;
+  transform: scale(1.1);
+}
+
+.input-focus {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#autocomplete {
+  width: 38.5rem;
+  height: 10rem;
+  overflow-y: scroll;
+  padding: 0;
+  background-color: white;
+  margin-left: -1.75rem;
+  margin-right: -1.5rem;
+  /* border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem; */
+  transition: ease-out 0.2s;
+}
+
+#autocomplete li {
+  list-style-type: none;
+  padding-top: 0.5rem;
+}
+
+#autocomplete a {
+  color: black;
+  width: 100%;
+  text-align: left;
+}
+
+#autocomplete li:hover {
+  background-color: #ccc;
+}
+
+@media (max-width: 767px) {
+  #first-content h1 {
+    font-size: 1.5rem;
+  }
+  .search-input {
+    width: 20rem;
+  }
+}
+
+/* First Content End */
+
+/* Search Your College  */
+#college-search {
+  text-align: center;
+  padding-top: 2rem;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(../images/homepage-bg2.jpg);
+  /* color: white; */
+  /* background-attachment: scroll; */
+}
+
+#college-search h2 {
+  color: white;
+}
+.bg-animation {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.carousel-nav {
+  width: 50%;
+  height: 2.5rem;
+  background-color: aquamarine;
+  margin-bottom: 5rem;
+  border-radius: 10rem;
+  list-style: none;
+  padding: 0;
+}
+.carousel-nav li {
+  background-color: aquamarine;
+  border-radius: 10rem;
+  padding: 0.5rem;
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+}
+.carousel-nav li:hover,
+li.active {
+  color: white;
+  background-color: #202040;
+  border-radius: 10rem;
+  border-style: outset;
+  border: 1px solid aquamarine;
+  cursor: pointer;
+}
+.row {
+  margin: auto;
+}
+
+.card {
+  margin: 3rem;
+}
+.card-title {
+  color: black;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+#show-more {
+  display: none;
+}
+
+#show-more-Btn {
+  margin-top: 2rem;
+}
+
+.tabcontent {
+  display: none;
+}
+.tabcontent.active {
+  padding-left: 5rem;
+  display: block;
+}
+.tabcontent.active .card {
+  width: 10rem;
+}
+
+@media (max-width: 990px) {
+  .carousel-nav {
+    width: 75%;
+  }
+}
+@media (max-width: 767px) {
+  .carousel-nav {
+    width: 100%;
+  }
+  .row {
+    justify-content: center;
+  }
+  .card {
+    margin: 1rem;
+  }
+  .tabcontent.active {
+    padding-left: 0rem;
+  }
+}
+
+.stream-icon {
+  width: 150px;
+  height: 150px;
+  background-image: url("../images/stream-icon.png");
+  background-repeat: no-repeat;
+  filter: grayscale(100%);
+  opacity: 0.5;
+  margin: auto;
+}
+.stream-icon.agriculture {
+  background-position: -0px 0;
+}
+.stream-icon.arts-humanities {
+  background-position: -1050px 0;
+}
+.stream-icon.commerce-banking {
+  background-position: -150px 0;
+}
+.stream-icon.dental {
+  background-position: -300px 0;
+}
+.stream-icon.design {
+  background-position: -450px 0;
+}
+.stream-icon.education {
+  background-position: -600px 0;
+}
+.stream-icon.engineering {
+  background-position: -750px 0;
+}
+.stream-icon.hotel-management {
+  background-position: -900px 0;
+}
+.stream-icon.information-technology {
+  background-position: -1200px 0;
+}
+.stream-icon.law {
+  background-position: -1350px 0;
+}
+.stream-icon.management {
+  background-position: -1500px 0;
+}
+.stream-icon.mass-communication {
+  background-position: -1650px 0;
+}
+.stream-icon.medical {
+  background-position: -1800px 0;
+}
+.stream-icon.nursing {
+  background-position: -1950px 0;
+}
+.stream-icon.paramedical {
+  background-position: -2100px 0;
+}
+.stream-icon.performing-arts {
+  background-position: -2250px 0;
+}
+.stream-icon.pharmacy {
+  background-position: -2400px 0;
+}
+.stream-icon.sciences {
+  background-position: -2550px 0;
+}
+
+.location-icon {
+  background-image: url("../images/location.png");
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  margin: auto;
+}
+
+.all-india {
+  width: 100px;
+  height: 150px;
+  background-position: -991px -155px;
+}
+
+.andaman-and-nicobar-islands {
+  width: 120px;
+  height: 150px;
+  background-position: -290px 10px;
+}
+
+.andhra-pradesh {
+  width: 120px;
+  height: 150px;
+  background-position: -7px -294px;
+}
+
+.arunachal-pradesh {
+  width: 120px;
+  height: 150px;
+  background-position: -150px -300px;
+}
+
+.assam {
+  width: 120px;
+  height: 150px;
+  background-position: -290px -294px;
+}
+
+.bihar {
+  width: 120px;
+  height: 150px;
+  background-position: -430px -294px;
+}
+
+.chandigarh {
+  width: 120px;
+  height: 150px;
+  background-position: -571px 6px;
+}
+
+.chhattisgarh {
+  width: 120px;
+  height: 150px;
+  background-position: -571px -164px;
+}
+
+.delhi {
+  width: 150px;
+  height: 150px;
+  background-image: url("../images/delhi.png");
+}
+.goa {
+  width: 120px;
+  height: 150px;
+  background-position: -10px -464px;
+}
+
+.gujarat {
+  width: 120px;
+  height: 150px;
+  background-position: -150px -464px;
+}
+
+.haryana {
+  width: 120px;
+  height: 150px;
+  background-position: -290px -464px;
+}
+
+.himachal-pradesh {
+  width: 120px;
+  height: 150px;
+  background-position: -430px -464px;
+}
+
+.jammu-and-kashmir {
+  width: 120px;
+  height: 150px;
+  background-position: -570px -464px;
+}
+
+.jharkhand {
+  width: 120px;
+  height: 150px;
+  background-position: -711px 0px;
+}
+
+.karnataka {
+  width: 120px;
+  height: 150px;
+  background-position: -711px -164px;
+}
+
+.kerala {
+  width: 120px;
+  height: 150px;
+  background-position: -711px -334px;
+}
+
+.lakshadweep {
+  width: 120px;
+  height: 150px;
+  background-position: -10px -630px;
+}
+
+.madhya-pradesh {
+  width: 120px;
+  height: 150px;
+  background-position: -150px -640px;
+}
+
+.maharashtra {
+  width: 120px;
+  height: 150px;
+  background-position: -290px -640px;
+}
+
+.manipur {
+  width: 120px;
+  height: 150px;
+  background-position: -430px -630px;
+}
+
+.meghalaya {
+  width: 120px;
+  height: 150px;
+  background-position: -570px -640px;
+}
+
+.mizoram {
+  width: 120px;
+  height: 150px;
+  background-position: -710px -640px;
+}
+
+.nagaland {
+  width: 120px;
+  height: 150px;
+  background-position: -851px 0;
+}
+
+.odisha {
+  width: 120px;
+  height: 150px;
+  background-position: -851px -170px;
+}
+
+.puducherry {
+  width: 120px;
+  height: 150px;
+  background-position: -851px -340px;
+}
+
+.punjab {
+  width: 120px;
+  height: 150px;
+  background-position: -851px -504px;
+}
+
+.rajasthan {
+  width: 120px;
+  height: 150px;
+  background-position: -10px -803px;
+}
+
+.sikkim {
+  width: 120px;
+  height: 150px;
+  background-position: -150px -803px;
+}
+
+.tamil-nadu {
+  width: 120px;
+  height: 150px;
+  background-position: -290px -803px;
+}
+
+.telangana {
+  width: 120px;
+  height: 150px;
+  background-position: -430px -803px;
+}
+
+.tripura {
+  width: 120px;
+  height: 150px;
+  background-position: -570px -803px;
+}
+
+.uttar-pradesh {
+  width: 120px;
+  height: 150px;
+  background-position: -710px -803px;
+}
+
+.uttarakhand {
+  width: 120px;
+  height: 150px;
+  background-position: -850px -803px;
+}
+
+.west-bengal {
+  width: 120px;
+  height: 150px;
+  background-position: -991px 6px;
+}
+
+/* Study Abroad */
+
+.content {
+  width: 100%;
+  position: relative;
+  height: 100%;
+}
+
+.side-image {
+  width: inherit;
+}
+
+.left,
+.right {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .content {
+    width: 100%;
+    position: relative;
+    height: 35rem;
+    text-align: center;
+  }
+
+  .side-image {
+    width: 50%;
+    height: 100%;
+  }
+  .right {
+    float: right;
+  }
+  .left {
+    float: left;
+  }
+  .content .col-md-6,
+  .content .col-12 {
+    position: absolute;
+    top: 25%;
+  }
+}
+
+/* College Compare */
+#compare {
+  margin: 6rem auto;
+  width: 60%;
+  height: 60%;
+}
+
+#compare-college .left {
+  /* background-color: rgb(174, 236, 216); */
+  background: rgb(0, 255, 191);
+  background: radial-gradient(
+    circle,
+    rgba(0, 255, 191, 1) 0%,
+    rgba(32, 32, 64, 1) 100%
+  );
+}
+
+/* Counselling */
+
+#counselling {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(../images/confused.jpg);
+  color: white;
+  height: 100%;
+}
+#counselling > .col {
+  position: relative;
+  top: 15%;
+}
+
+.errorlist {
+  margin-top: 0;
+  padding-left: 0;
+}
+
+.errors {
+  border: 1px solid red;
+  background-color: rgb(233, 207, 207);
+}
+
+#msg {
+  position: fixed;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 111;
+  font-weight: 600;
+}
+
+/* ######################################## */
+
+.client-img {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border: 4px solid #fff;
+  margin: 0px auto 20px;
+  border-radius: 100%;
+}
+.carousel-content {
+  padding: 50px 0px;
+  filter: drop-shadow(2px 4px 6px black);
+}
+.carousel-content h3 span {
+  font-size: 17px;
+  font-weight: normal;
+  color: #e8e8e8;
+  text-transform: uppercase;
+}
+.client-img img {
+  width: 100%;
+}
+#testimonial {
+  background-color: rgb(4, 53, 68);
+  text-align: center;
+  padding: 40px 0px;
+  color: #fff;
+  height: 100%;
+}
+#testimonial .carousel-control-prev,
+#testimonial .carousel-control-next {
+  font-size: 36px;
+  filter: drop-shadow(2px 4px 6px black);
+}
+#testimonial h2 {
+  font-size: 40px;
+  font-style: italic;
+  border-bottom: 1px solid #7fbdff;
+  padding-bottom: 20px;
+  display: inline-block;
+}

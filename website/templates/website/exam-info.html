@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% load static %} {% block css_files %}
+<link rel="stylesheet" href="{% static 'website/css/exam-info.css' %}" />
+
+{% endblock css_files %} {% block content %}
+
+<div class="container-fluid padding">
+  <div class="exam-info row">
+    
+    <div class="exam-details text-center col-md">
+      <h1>{{ exam.name }} {{exam.exam_year}}</h1>
+      <br />
+      <ul>
+        <i class="far fa-calendar-alt"></i>
+        <li class="mr-5 ml-2">Application start: <strong>{{ exam.application_start_date|date:"d F, Y" }}</strong></li>
+        
+        <i class="far fa-calendar-alt"></i>
+        <li class="ml-2">Application End: <strong>{{ exam.application_start_date|date:"d F, Y" }}</strong></li>
+      </ul>
+
+      <br>
+
+      <div>
+      <i class="far fa-calendar-alt mr-2"></i>
+      Exam Date: <h5>{{ exam.exam_start_date|date:"d F, Y" }} - {{ exam.exam_end_date|date:"d F, Y" }}</h5>
+      </div>
+    <br>
+    <br>
+      <div>
+      <p>Last Updated On: {{exam.last_updated}}</p>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <br />
+  <br />
+  <br />
+</div>
+
+
+<div class="container box" id="overview">
+  {{ exam.information|safe}}
+</div>
+
+{% endblock content %}

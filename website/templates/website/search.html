@@ -1,0 +1,120 @@
+{% extends 'base.html' %} {% load static %} {% block css_files %}
+<link rel="stylesheet" href="{% static 'website/css/search.css' %}" />
+{% endblock css_files %} {% block content %}
+
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-md-3 filter">
+
+      <form action="{% url 'search' %}" method="GET">
+        <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
+        <hr />
+
+        <!-- BEGIN FILTER BY CATEGORY -->
+        <div class="container">
+          <h4>By Location:</h4>
+          <div style="height: 150px; overflow-y: scroll">
+            {% for location in locations %}
+            <div class="checkbox">
+              <label
+                ><input
+                  type="checkbox"
+                  class="icheck"
+                  name="location"
+                  value="{{location.0}}"
+                  {% if location.0 in request.GET.location %}checked{% endif %}
+                />
+                {{location.0}}</label
+              >
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <br />
+        <hr />
+        <div class="container">
+          <h4>By Stream:</h4>
+          <div style="height: 150px; overflow-y: scroll">
+            {% for stream in streams %}
+            <div class="checkbox">
+              <label
+                ><input
+                  type="checkbox"
+                  class="icheck"
+                  name="stream"
+                  value="{{stream.name}}"
+                  {% if stream.name in request.GET.stream %}checked{% endif %}
+                />
+                {{ stream.name }}</label
+              >
+            </div>
+            {% endfor %}
+          </div>
+          <!-- END FILTER BY CATEGORY -->
+        </div>
+        <br />
+
+        <button type="sumbit" class="btn btn-primary mb-5">Apply</button>
+        <br />
+      </form>
+
+    </div>
+    <div class="col-md">
+        {% for college in colleges %}
+          <a href="{% url 'college_info' slug=college.slug %}">
+            <div class="college-info row">
+              <div class="college-logo col-md-1">
+                <img
+                  src="{% static 'website/images/logo.png' %}"
+                  alt="{{ college.name }}"
+                />
+              </div>
+              <div class="college-details text-center col-md">
+                <h3>{{ college.name }}</h3>
+                <i class="fas fa-map-marker-alt fa-sm"></i>
+                {{ college.city}}, {{college.state }}
+
+                <ul>
+                  <i class="far fa-calendar-alt"></i>
+                  <li class="mr-2">
+                    Established in: {{ college.established_in }}
+                  </li>
+                  <i class="fas fa-tag fa-xs"></i>
+                  <li class="mr-2">Type: {{ college.college_type}}</li>
+                  <i class="fas fa-medal fa-xs"></i>
+                  <li>Approved By: {{ college.approved_by }}</li>
+                </ul>
+
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+
+        {% if colleges.has_other_pages %}
+          <ul class="pagination">
+            {% if colleges.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ colleges.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+
+            {% for i in colleges.paginator.page_range %}
+              {% if colleges.number == i %}
+                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+
+            {% if colleges.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ colleges.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

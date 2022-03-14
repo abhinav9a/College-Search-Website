@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block title%}Create Account{%endblock title %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'website/css/form.css' %}" />
+{% endblock css_files %}
+
+
+{%block content %}
+
+<div class="container">
+  <div class="card bg-light">
+    <article class="card-body mx-auto" style="width: 75%">
+      <h4 class="card-title mt-3 mb-4 text-center">Create Account</h4>
+
+      <!-- Social Login -->
+      <p>
+        <a href="{% provider_login_url 'google' %}" class="btn btn-block btn-google">
+          <i class="fa fa-google-plus"></i>  Login via Google<b>+</b></a
+        >
+        <a href="{% provider_login_url "facebook" method="oauth2" %}" class="btn btn-block btn-facebook">
+          <i class="fa fa-facebook-f"></i>   Login via facebook</a
+        >
+      </p>
+      <p class="divider-text">
+        <span class="bg-light" style="font-size:20px">OR</span>
+      </p>
+
+      <!-- Form -->
+      <form action="{% url 'register_user' %}" method="POST">
+
+      {% csrf_token %}
+
+      <!-- form-group-->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+          </div>
+          {{ form.name }}
+        </div>
+        {% if form.name.errors %}{{ form.name.errors }}{% endif %}
+
+        <!-- form-group -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">
+              <i class="fa fa-envelope"></i>
+            </span>
+          </div>
+          {{ form.email }}
+        </div>
+        {% if form.email.errors %}{{ form.email.errors }}{% endif %}
+
+        <!-- form-group -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+          </div>
+          <div class="input-group-prepend">
+            <span class="input-group-text">+91</span>
+          </div>
+          {{ form.contact_number }}
+        </div>
+        {% if form.contact_number.errors %}{{ form.contact_number.errors }}{% endif %}
+
+        <!-- form-group -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          {{ form.password1 }}
+        </div>
+        {% if form.password1.errors %}{{ form.password1.errors }}{% endif %}
+
+        <!-- form-group -->
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+          </div>
+          {{ form.password2 }}
+        </div>
+        {% if form.password2.errors %}{{ form.password2.errors }}{% endif %}
+
+        <!-- form-group -->
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block">
+            Create Account
+          </button>
+        </div>
+
+        <!-- form-group -->
+        <p class="text-center">Have an account? <a href="{% url 'login_user' %}">Log In</a></p>
+      </form>
+    </article>
+  </div>
+  <!-- card.// -->
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,134 @@
+{% extends 'base.html' %} {% load static %} {% block css_files %}
+<link rel="stylesheet" href="{% static 'website/css/exams.css' %}" />
+{% endblock css_files %} {% block content %}
+
+<div class="container pt-5">
+  <div class="row">
+    <div class="col-md-3 filter">
+
+      <form action="{% url 'exams' %}" method="GET">
+        <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
+        <hr />
+
+        {% comment %} BEGIN FILTER BY CATEGORY {% endcomment %}
+        <div class="container">
+          <h4>By Stream:</h4>
+          <div class="pt-1" style="height: 150px; overflow-y: scroll">
+            {% for stream in streams %}
+            <div class="checkbox">
+              <label
+                ><input
+                  type="checkbox"
+                  class="icheck"
+                  name="stream"
+                  value="{{stream.name}}"
+                  {% if stream.name in request.GET.stream %}checked{% endif %}
+                />
+                {{ stream.name }}</label
+              >
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% comment %} END FILTER BY CATEGORY {% endcomment %}
+        <br />
+        <hr>
+        <br>
+
+        <div class="container">
+          <h4>By Mode:</h4>
+          <div class="pt-3" style="height: 150px;">
+            {% for exam_mode in exam_modes %}
+            <div class="checkbox">
+              <label
+                ><input
+                  type="checkbox"
+                  class="icheck"
+                  name="exam_mode"
+                  value="{{exam_mode.0}}"
+                  {% if exam_mode.0 in request.GET.exam_mode %}checked{% endif %}
+                />
+                {{ exam_mode.0 }}</label
+              >
+            </div>
+            {% endfor %}
+          </div>
+          <!-- END FILTER BY CATEGORY -->
+        </div>
+        <br />
+
+
+        <button type="sumbit" class="btn btn-primary mb-5">Apply</button>
+        <br />
+      </form>
+
+    </div>
+    <div class="col-md">
+        {% for exam in exams %}
+          <a href="{% url 'exam_info' slug=exam.slug%}">
+            <div class="exam-info row">
+              <div class="exam-details text-center col-md">
+                <h3>{{ exam.name|upper }}  {{exam.exam_year}}</h3>
+
+                <div class="row my-4">
+                    <div class="col application-date">
+                        <div class="row">
+                            <div class="col-12">
+                                <img src="{% static 'website/images/application-form.png' %}" alt="Application Date">
+                            </div>
+                            <div class="col-12">
+                                <div class="important-dates">
+                                    <h6>Application Date</h6>
+                                    <p>{{exam.application_start_date|date:"d F Y"}} - {{exam.application_end_date|date:"d F Y"}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col exam-date">
+                        <div class="row">
+                            <div class="col-12">
+                                <img src="{% static 'website/images/exam-date.png' %}" alt="Exam Date">
+                            </div>
+                            <div class="col-12">
+                                <div class="important-dates">
+                                    <h6>Exam Date</h6>
+                                    <p>{{exam.exam_start_date|date:"d F Y"}} - {{exam.exam_end_date|date:"d F Y"}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+
+        {% if exams.has_other_pages %}
+          <ul class="pagination">
+            {% if exams.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ exams.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+
+            {% for i in exams.paginator.page_range %}
+              {% if exams.number == i %}
+                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+
+            {% if exams.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ exams.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

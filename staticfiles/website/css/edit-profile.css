@@ -1,0 +1,66 @@
+.dataList {
+  /* display: flex; */
+  margin: 0 4rem 0 -2rem;
+  /* width: auto; */
+  /* max-height: 300px; */
+  /* overflow-x: hidden; */
+  /* overflow-y: auto; */
+  /* padding: 0; */
+  /* flex-wrap: wrap; */
+}
+
+.dataList > .row {
+  margin: 1rem 0;
+  flex-wrap: nowrap;
+  /* width: 100%; */
+}
+
+/* .dataList>.row>div {
+  border: 1px solid red;
+} */
+
+.label {
+  display: block;
+  color: #afafaf;
+  white-space: normal;
+  line-height: 1.3;
+  font-size: 14px;
+  overflow: hidden;
+  font-weight: 300;
+  padding: 0;
+  margin-left: 2rem;
+}
+
+.title {
+  padding-top: 25px;
+  padding-left: 0.5rem;
+  margin-left: 2rem;
+  margin-right: -1rem;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.data {
+  /* margin: 0; */
+  font-size: 18px;
+  /* word-break: break-word; */
+}
+
+.data > input {
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .dataList>.row {
+    flex-wrap: wrap;
+  }
+
+  .title {
+    margin-bottom: 1rem;
+  }
+
+  .data {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+  }
+}

@@ -1,0 +1,295 @@
+{% extends 'base.html' %} {% load static %} {% block css_files %}
+<link rel="stylesheet" href="{% static 'website/css/homepage.css' %}" />
+{% endblock css_files %} 
+{% block content %}
+
+
+
+<div class="container-fluid bg-animation" id="first-content">
+  <h1 class="mb-5 text-center">
+    A One-Stop Solution for Your Medical Education Needs!
+  </h1>
+  <div class="search-input-wrapper">
+    <input
+      class="search-input"
+      id="search"
+      name="search"
+      type="text"
+      oninput="suggestions();"
+      placeholder="What are you looking for?"
+    />
+    <i class="fas fa-search search-inputIcon"></i>
+    <div>
+      <ul id="autocomplete" style="display:none"></ul>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-animation" id="college-search">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Search your College</h2>
+      <hr />
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="d-flex carousel-nav mx-auto mb-3">
+            <li
+              href="#"
+              class="col active"
+              onclick="changeStatus(this)"
+              data-target="location"
+            >
+              Location
+            </li>
+            <li
+              href="#"
+              class="col"
+              onclick="changeStatus(this)"
+              data-target="stream"
+            >
+              Stream
+            </li>
+            <li
+              href="#"
+              class="col"
+              onclick="changeStatus(this)"
+              data-target="exams"
+            >
+              Exams
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="container">
+          <div class="tabcontent active" id="location">
+            <div class="row">
+              {% for location in locations|slice:":8" %}
+              <div class="card">
+                <a href="{% url 'search' %}?location={{location.0|urlencode}}">
+                  <div class="location-icon {{location.0|slugify}}"></div>
+                  <h6 class="card-title py-1 my-auto">{{location.0}}</h6>
+                </a>
+              </div>
+              {% endfor %}
+
+              <span id="show-less"></span>
+              <span class="row" id="show-more">
+                {% for location in locations|slice:"8:-1" %}
+                <div class="card">
+                  <a
+                    href="{% url 'search' %}?location={{location.0|urlencode}}"
+                  >
+                    <div class="location-icon {{location.0|slugify}}"></div>
+                    <h6 class="card-title py-1 my-auto">{{location.0}}</h6>
+                  </a>
+                </div>
+                {% endfor %}
+              </span>
+            </div>
+            <div class="row d-flex justify-content-center mb-3">
+              <button
+                class="btn btn-warning btn-lg"
+                id="show-more-Btn"
+                onclick="showMore()"
+              >
+                Show more
+              </button>
+            </div>
+          </div>
+          <div class="tabcontent" id="stream">
+            <div class="row">
+              {% for stream in streams %}
+              <div class="card">
+                <a href="{% url 'search' %}?stream={{stream.name|urlencode}}">
+                  <div class="stream-icon {{stream.name|slugify}}"></div>
+                  <h6 class="card-title py-1 my-auto">{{stream.name}}</h6>
+                </a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="tabcontent" id="exams">
+            <div class="row">
+              {% for stream in streams %}
+              <div class="card">
+                <a href="{% url 'exams' %}?stream={{stream.name|urlencode}}">
+                  <div class="stream-icon {{stream.name|slugify}}"></div>
+                  <h6 class="card-title py-1 my-auto">{{stream.name}}</h6>
+                </a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid content">
+  <img
+    class="side-image right bg-animation"
+    src="../../static/website/images/study-abroad.jpg"
+    alt="Want to study abroad?"
+  />
+  <div class="row">
+    <div class="col-md-6 col-12 left mt-5">
+      <h3>Want to Study Abroad?</h3>
+      <h4 class="mt-4 mb-3">Don't worry. We will guide you.</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim facilis
+        consequuntur neque tempora ducimus voluptatum veritatis ipsam tempore
+        inventore pariatur numquam deserunt doloribus aliquam
+      </p>
+      <a href="#" class="btn btn-primary btn-lg mb-5">Explore</a>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid content" id="compare-college">
+  <div class="side-image left">
+    <img
+      id="compare"
+      src="../../static/website/images/compare.png"
+      alt="Compare Colleges"
+    />
+  </div>
+  <div class="row pt-5">
+    <div class="col-md-6 col-12 right">
+      <h3 class="mb-4">Compare College</h3>
+      <p>
+        Confused between different colleges? Compare them and find the best
+        college.
+      </p>
+      <a href="{% url 'compare_colleges' %}" class="btn btn-success btn-lg my-5"
+        >Compare College</a
+      >
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-animation py-5" id="counselling">
+  <div class="col text-center">
+    <h3 class="pt-5 pb-2">Are You Confused?</h3>
+    <h4 class="pb-5">
+      Looking for career guidance? Our experts know exactly what you need!
+    </h4>
+
+    <p class="container px-5">
+      Our academic experts help you evaluate your career and course choices
+      accurately while taking into account your educational background,
+      strengths & skills. From shortlisting the best colleges to tracking your
+      entire admission process, the counselling by our experts will make your
+      higher education journey hassle-free and put you on the path of success.
+    </p>
+
+    <button type="button" data-toggle="modal" data-target="#inquiryFormDialog" class="btn btn-lg btn-warning my-5">Talk to our Experts</button>
+  </div>
+</div>
+
+{% if testimonials %}
+  <div id="testimonial" class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2>Testimonials</h2>
+        </div>
+        <div class="col-12">
+          <div
+            id="testimonialCarousel"
+            class="carousel slide"
+            data-ride="carousel"
+          >
+            
+            <div class="carousel-inner" role="listbox">
+              <!-- Slides -->
+
+              {% for testimonial in testimonials|slice:":3" %}
+                <div class="carousel-item">
+                  <div class="carousel-content">
+                    <div class="client-img">
+                      <img
+                        src="{{testimonial.image.url}}"
+                        alt="Testimonial Slider"
+                      />
+                    </div>
+                    <h3>{{testimonial.name}}<br /><span>{{testimonial.college_name}}</span></h3>
+                    <p class="col-md-8 offset-md-2">
+                      {{testimonial.message}}
+                    </p>
+                  </div>
+                </div>
+              {% endfor %}
+            
+              <!-- Slider pre and next arrow -->
+              <a
+                class="carousel-control-prev text-white"
+                href="#testimonialCarousel"
+                role="button"
+                data-slide="prev"
+              >
+                <i class="fas fa-chevron-left"></i>
+              </a>
+              <a
+                class="carousel-control-next text-white"
+                href="#testimonialCarousel"
+                role="button"
+                data-slide="next"
+              >
+                <i class="fas fa-chevron-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="container">
+
+  <div class="modal" tabindex="-1" role="dialog" id="inquiryFormDialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Need help in choosing a college?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Fill this form and we will contact you as soon as possible!</p>
+          <form action="" method="post" id="inquiryForm">
+            {% csrf_token %}
+            {% for field in inquiry_form %}
+            <div class="form-group">
+            <label for="id_{{field.name}}">{{field.label}}</label>
+            {{field}}
+            <div id="{{field.name}}_error" class="errorlist"></div>
+            </div>
+            
+            {% endfor %}
+            <button type="reset" data-dismiss="modal" id="closeInquiryForm" class="btn btn-warning">Cancel</button>
+            <button type="submit" id="submitInquiryForm" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+</div>
+
+{% endblock content %} {% block script_files %}
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script src="{% static 'website/js/homepage.js' %}"></script>
+
+{% endblock script_files %}

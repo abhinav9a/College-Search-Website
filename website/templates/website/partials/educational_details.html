@@ -1,0 +1,152 @@
+<form action="{% url 'update_educational_details' %}" method="post">
+  {% csrf_token %}
+  <div class="dataList">
+    <div class="row">
+      <div class="col-lg-1 col-md-12 title">10th</div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Passing Year</div>
+        <div class="data">
+          <input type="text" name="passing_year" id="10th_passing_year" value={{ 10th.passing_year }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Board</div>
+        <div class="data">
+          <input type="text" name="university" id="10th_university" value={{ 10th.university }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Percentage/CGPA</div>
+        <div class="data">
+          <input type="number" name="score" id="10th_score" step="any" value={{ 10th.score }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12" style="display: none">
+        <div class="label">Stream</div>
+        <div class="data">
+          <input type="text" name="stream" id="10th_stream" >
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-1 col-md-12 title">12th</div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Passing Year</div>
+        <div class="data">
+          <input type="text" name="passing_year" id="12th_passing_year" value={{ 12th.passing_year }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Board</div>
+        <div class="data">
+          <input type="text" name="university" id="12th_university" value={{ 12th.university }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Percentage/CGPA</div>
+        <div class="data">
+          <input type="number" name="score" id="12th_score" step="any" value={{ 12th.score }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Stream</div>
+        <div class="data">
+          <input type="text" name="stream" id="12th_stream" value={{ 12th.stream }} >
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-1 col-md-12 title">UG</div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Passing Year</div>
+        <div class="data">
+          <input type="text" name="passing_year" id="UG_passing_year" value={{ UG.passing_year }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">University</div>
+        <div class="data">
+          <input type="text" name="university" id="UG_university"  value={{ UG.university }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Percentage/CGPA</div>
+        <div class="data">
+          <input type="number" name="score" id="UG_score" step="any"  value={{ UG.score }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Stream</div>
+        <div class="data">
+          <input type="text" name="stream" id="UG_stream"  value={{ UG.stream }} >
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-1 col-md-12 title">PG</div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Passing Year</div>
+        <div class="data">
+          <input type="text" name="passing_year" id="PG_passing_year" value={{ PG.passing_year }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">University</div>
+        <div class="data">
+          <input type="text" name="university" id="PG_university" value={{ PG.university }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Percentage/CGPA</div>
+        <div class="data">
+          <input type="number" name="score" id="PG_score" step="any" value={{ PG.score }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Stream</div>
+        <div class="data">
+          <input type="text" name="stream" id="PG_stream" value={{ PG.passing_year }} >
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-1 col-md-12 title">Ph.D.</div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Passing Year</div>
+        <div class="data">
+          <input type="text" name="passing_year" id="Ph_D_passing_year" value={{ Ph_D.passing_year }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">University</div>
+        <div class="data">
+          <input type="text" name="university" id="Ph_D_university" value={{ Ph_D.university }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Percentage/CGPA</div>
+        <div class="data">
+          <input type="number" name="score" id="Ph_D_score" step="any" value={{ Ph_D.score }} >
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <div class="label">Stream</div>
+        <div class="data">
+          <input type="text" name="stream" id="Ph_D_stream" value={{ Ph_D.stream }} >
+        </div>
+      </div>
+    </div> 
+
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Close
+    </button>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+  </div>
+</form>

@@ -1,0 +1,299 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock title %} | KnowledgeDunia.com</title>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/858899e339.js"
+      crossorigin="anonymous"
+    ></script>
+
+    
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+
+    {% block css_files %}{% endblock css_files %}
+  </head>
+  <body>
+    <section id="header-section">
+      <header>
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col">
+              <a class="navbar-brand" tabindex="0" href="{% url 'homepage' %}">
+                KnowledgeDunia.com
+              </a>
+            </div>
+            <div class="col d-flex justify-content-end social-media">
+              <p class="mb-0 d-flex">
+                <a
+                  href="#"
+                  class="
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                    social
+                  "
+                  ><span class="fab fa-facebook-f"
+                    ><i class="sr-only">Facebook</i></span
+                  ></a
+                >
+                <a
+                  href="#"
+                  class="
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                    social
+                  "
+                  ><span class="fab fa-twitter"
+                    ><i class="sr-only">Twitter</i></span
+                  ></a
+                >
+                <a
+                  href="#"
+                  class="
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                    social
+                  "
+                  ><span class="fab fa-instagram"
+                    ><i class="sr-only">Instagram</i></span
+                  ></a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-0">
+        <div class="container">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#ftco-nav"
+            aria-controls="ftco-nav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="fa fa-bars"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a href="{% url 'homepage' %}" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'search' %}">College</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'exams' %}" class="nav-link">Exams</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'compare_colleges' %}" class="nav-link">Compare College</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a href="{% url 'profile' %}" class="nav-link profile_pic  m-0">
+                    <img
+                      {% if user.profile_pic %}
+                        src="{{ user.profile_pic.url }}"
+                      {% else %}
+                        src="{% static 'website/images/avatar.png' %}"
+                      {% endif %}
+                      alt=""
+                      class="rounded-circle"
+                      width="35"
+                      height="35"
+                      style="background-color:white"
+                    />
+                  </a>
+                </li>
+                {% if user.is_active and user.is_superuser %}
+                  <li class="nav-item">
+                    <a href="{% url 'admin:index' %}" class="nav-link mt-1">Admin Panel</a>
+                  </li>
+                {% endif %}
+
+                <li class="nav-item">
+                  <a href="{% url 'logout_user' %}" class="nav-link mt-1">Logout</a>
+                </li>
+
+                {% else %}
+                <li class="nav-item">
+                  <a href="{% url 'login_user' %}" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'register_user' %}"
+                    >Register</a
+                  >
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div id="msg" class="text-center"></div>
+    </section>
+
+    <div id="page-container">
+      {% if messages %}
+        <div class="fluid-container error-message">
+          {% for message in messages %}
+          <h4 {% if message.tags %}
+            class="alert alert-{% if message.tags == 'success' %}success{% else %}danger{% endif%} 
+            text-center"
+            {% endif %}
+          >
+            {{ message }}
+          </h4>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div id="content-wrap">{% block content %}{% endblock content %}</div>
+    </div>
+
+    <div> 
+      <button onclick="scrollToTop()" id="scrollToTop" title="Go To Top">
+        <i class="fas fa-arrow-up fa-2x"></i>
+      </button>
+    </div>
+
+    <footer>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="menu">
+            <a href="{% url 'homepage' %}">Home</a>
+            <span> | </span>
+            <a href="{% url 'search' %}">Colleges</a>
+            <span> | </span>
+            <a href="{% url 'exams' %}">Exams</a>
+            <span> | </span>
+            <a href="{% url 'compare_colleges' %}">Compare Colleges</a>
+            <span> | </span>
+            <a href="{% url 'about_us' %}">About Us</a>
+            <span> | </span>
+            <a href="{% url 'contact_us' %}">Contact Us</a>
+            {% comment %} <span> | </span>
+            <a href="{% url 'contact_us' %}">Blog</a> {% endcomment %}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col my-3 d-flex justify-content-center social-media">
+          <p class="mb-0 d-flex">
+            <a
+              href="#"
+              class="
+                d-flex
+                align-items-center
+                justify-content-center
+                social
+              "
+              ><span class="fab fa-facebook-f"
+                ><i class="sr-only">Facebook</i></span
+              ></a
+            >
+            <a
+              href="#"
+              class="
+                d-flex
+                align-items-center
+                justify-content-center
+                social
+              "
+              ><span class="fab fa-twitter"
+                ><i class="sr-only">Twitter</i></span
+              ></a
+            >
+            <a
+              href="#"
+              class="
+                d-flex
+                align-items-center
+                justify-content-center
+                social
+              "
+              ><span class="fab fa-instagram"
+                ><i class="sr-only">Instagram</i></span
+              ></a
+            >
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-center">
+          <p class="mb-1">Copyright &#169 2021 All rights reserved</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      var prevScrollpos = window.pageYOffset;
+
+      // When the user scrolls down 200px from the top of the document, show the button
+      window.onscroll = function () {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+
+          document.getElementById("scrollToTop").style.display = "block";
+
+          var currentScrollPos = window.pageYOffset;
+          
+          if (prevScrollpos > currentScrollPos) {
+            document.getElementById("header-section").scrollIntoView({ behavior: "smooth" });
+            document.getElementById("header-section").style.top = "0";
+          } else {
+            document.getElementById("header-section").style.top = "-7rem";
+          }
+          prevScrollpos = currentScrollPos;
+        } else {
+          document.getElementById("scrollToTop").style.display = "none";
+
+          document.getElementById("header-section").style.top = "0";
+        }
+      };
+
+
+      // When the user clicks on the button, scroll to the top of the document
+      function scrollToTop() {
+        window.scrollTo(0, 0);
+      }
+
+      document.body.innerHTML = document.body.innerHTML.replace(/None/g, '-');
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    {% block script_files %}{% endblock script_files %}
+  </body>
+</html>
