@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load socialaccount %}
+{% block title %}Login | {% endblock title %}
 
-{% block title%}Create Account{%endblock title %} 
 
 {% block css_files %}
 <link rel="stylesheet" href="{% static 'website/css/form.css' %}" />
@@ -18,10 +18,10 @@
       <!-- Social Login -->
       <p>
         <a href="{% provider_login_url 'google' %}" class="btn btn-block btn-google">
-          <i class="fa fa-google-plus"></i>  Login via Google<b>+</b></a
+          <i class="fa fa-google-plus"></i>  Login via Google</a
         >
         <a href="{% provider_login_url "facebook" method="oauth2" %}" class="btn btn-block btn-facebook">
-          <i class="fa fa-facebook-f"></i>   Login via facebook</a
+          <i class="fa fa-facebook-f"></i>   Login via Facebook</a
         >
       </p>
       <p class="divider-text">

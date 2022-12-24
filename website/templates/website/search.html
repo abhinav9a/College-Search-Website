@@ -60,6 +60,7 @@
 
     </div>
     <div class="col-md">
+      {% if colleges is None %} <h1 class="text-center">No college found.</h1> {% endif %}
         {% for college in colleges %}
           <a href="{% url 'college_info' slug=college.slug %}">
             <div class="college-info row">

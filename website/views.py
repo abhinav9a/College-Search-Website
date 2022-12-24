@@ -1,4 +1,3 @@
-from website.tasks import send_welcome_mail
 from accounts.models import CustomUser
 from website.models import EXAM_MODES, College, EducationDetails, ExamDetail, Facility, Review, STATES, Stream, Testimonial
 from website.forms import EditProfileForm, InquiryForm, LoginForm, RegistationForm, ReviewForm
@@ -12,11 +11,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.forms.models import model_to_dict
 import os
-# Create your views here.
-
-
-def test(request):
-    return render(request, 'test.html')
 
 
 def homepage(request):
@@ -75,9 +69,16 @@ def register(request):
         name = form.cleaned_data.get('name')
         email = form.cleaned_data.get('email')
 
-        # send e-mail in background using celery
-        send_welcome_mail.delay(name, email)
+        ################################ E-mail ################################
+        email_template = get_template('website/email/welcome.html')
+        d = {'name': name}
+        subject, from_email, to = 'Welcome to KnowledgeDunia.com', 'abhinav.raj.9a@gmail.com', email
+        html_content = email_template.render(d)
+        msg = EmailMultiAlternatives(subject, html_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
 
+        #########################################################################
 
         messages.success(request, 'Account created!')
         return redirect('login_user')
@@ -190,7 +191,7 @@ def search(request):
             name__icontains=request.GET.get('search'))
 
     # Pagination
-    paginator = Paginator(colleges_list, 10)
+    paginator = Paginator(colleges_list, 10, allow_empty_first_page=False)
 
     page = request.GET.get('page', 1)
     try:
@@ -198,7 +199,7 @@ def search(request):
     except PageNotAnInteger:
         colleges = paginator.page(1)
     except EmptyPage:
-        colleges = paginator.page(paginator.num_pages)
+        colleges = None
 
     return render(request, 'website/search.html', {
         'colleges': colleges,
@@ -221,7 +222,7 @@ def exams(request):
         exams_list = exams_list.filter(stream__name__in=exam_modes).distinct()
 
     # Pagination
-    paginator = Paginator(exams_list, 10)
+    paginator = Paginator(exams_list, 10, allow_empty_first_page=False)
 
     page = request.GET.get('page', 1)
     try:
@@ -229,7 +230,7 @@ def exams(request):
     except PageNotAnInteger:
         exams = paginator.page(1)
     except EmptyPage:
-        exams = paginator.page(paginator.num_pages)
+        exams = None
 
     return render(request, 'website/exams-list.html', {
         'streams': streams,
@@ -341,8 +342,9 @@ def contactUs(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            # form.save()
-            return redirect('contact-us')
+            form.save()
+            messages.success(request, "Submitted successfully!")
+            return redirect('contact_us')
 
     return render(request, "website/contact-us.html", {
         'form': form,

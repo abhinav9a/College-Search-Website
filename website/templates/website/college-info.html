@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% load static %} {% block css_files %}
+{% extends 'base.html' %} {% load static %} 
+
+{% block title %}{{college.name}} | {% endblock title %}
+{% block css_files %}
 <link rel="stylesheet" href="{% static 'website/css/college-info.css' %}" />
 
 {% endblock css_files %} {% block content %}
@@ -85,10 +88,10 @@
           <td>
             {% if course.mode is not None %}{{ course.mode|title }}{% endif %}
           </td>
-          <td>{% if course.fees is not None %}{{ course.fees }}{% endif %}</td>
+          <td>{% if course.fees is not None %}{{ course.fees }}{% else %} - {% endif %}</td>
           <td>
             {% if course.duration is not None %}{{ course.duration }}
-            yrs.{%endif %}
+            yrs.{% else %} - {%endif %}
           </td>
         </tr>
         {% endfor %}
@@ -160,10 +163,10 @@
   {% endif %}
 </div>
 
-<div class="container box" id="campus">
+{% comment %} <div class="container box" id="campus">
   <h3>Campus</h3>
   <div class="border"></div>
-</div>
+</div> {% endcomment %}
 
 
 

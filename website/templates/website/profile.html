@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% load static %} 
-{% block title %}Profile{% endblock title %} 
+{% block title %}Profile | {% endblock title %} 
 {% block css_files %}
 <link rel="stylesheet" href="{% static 'website/css/profile.css' %}" />
 <link rel="stylesheet" href="{% static 'website/css/edit-profile.css' %}" />
@@ -27,7 +27,7 @@
                 {% csrf_token %}
                 <input type="file" name="profile_pic" accept="image/*" id="id_profile_pic">
               </form>
-              <div class="edit"  id="upload" onclick="$('#id_profile_pic').trigger('click'); return false;">
+              <div class="edit"  id="upload" onclick={uploadProfileImage()}>
                 <img src="{% static 'website/images/edit-icon1.png' %}" alt="Upload Profile Picture">
               </div>
               <!-- Profile Summary-->
@@ -270,8 +270,15 @@
 </div>
 
 <script>
-  document.getElementById("id_profile_pic").onchange = function() {
+  const uploadProfileImage =()=>{
+    document.getElementById("id_profile_pic").click();
+    document.getElementById("id_profile_pic").onchange = () =>{
       document.getElementById("upload_form").submit();
-  };
+    }
+
+  }
+  {% comment %} document.getElementById("id_profile_pic").onchange = function() {
+      document.getElementById("upload_form").submit();
+  }; {% endcomment %}
 </script>
 {% endblock content %}

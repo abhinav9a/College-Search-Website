@@ -45,8 +45,8 @@ admin.site.register(Course, CourseAdmin)
 admin.site.register(College, CollegeAdmin)
 admin.site.register(Review)
 
-# admin.site.register(Stream)
-# admin.site.register(Facility)
+admin.site.register(Stream)
+admin.site.register(Facility)
 
 admin.site.register(Inquiry)
 admin.site.register(Testimonial)

@@ -197,22 +197,22 @@
         <div class="col parameters">Courses</div>
         <div class="col">
           {% for course in college_one.courses.all %}
-            {{course}}<br />
+            <b>{{course}}</b> ({{course.mode}})<br />
           {% endfor %}
         </div>
         <div class="col">
           {% for course in college_two.courses.all %}
-            {{course}}<br />
+            <b>{{course}}</b> ({{course.mode}})<br />
           {% endfor %}
         </div>
         <div class="col">
           {% for course in college_three.courses.all %}
-            {{course}}<br />
+            <b>{{course}}</b> ({{course.mode}})<br />
           {% endfor %}
         </div>
         <div class="col">
           {% for course in college_four.courses.all %}
-            {{course}}<br />
+            <b>{{course}}</b> ({{course.mode}})<br />
           {% endfor %}
         </div>
       </div>

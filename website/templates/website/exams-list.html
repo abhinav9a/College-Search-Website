@@ -64,6 +64,7 @@
 
     </div>
     <div class="col-md">
+      {% if exams is None %} <h1 class="text-center">No Exams found.</h1> {% endif %}
         {% for exam in exams %}
           <a href="{% url 'exam_info' slug=exam.slug%}">
             <div class="exam-info row">

@@ -101,7 +101,7 @@ class Course(models.Model):
                             help_text='e.g. Under Graduate, Post Graduate, etc.')
     mode = MultiSelectField(choices=STUDY_MODES, blank=True, null=True)
     fees = models.CharField(max_length=64, blank=True, null=True)
-    duration = models.CharField(max_length=4)
+    duration = models.CharField(max_length=4, blank=True, null=True)
     college = models.ForeignKey(
         'College', on_delete=CASCADE, related_name='courses')
 
