@@ -305,7 +305,7 @@
           <button type="button" class="close" onclick="closeFun(this);" data-dismiss="modal" aria-label="Close" data-count="college_one">
             <span aria-hidden="true">×</span>
           </button>
-          <div class="pb-3"><img src="{% static 'website/images/logo.png' %}" alt="" height="50" width="50"></div>
+          <div class="pb-3"><img src="{{college_one.logo.url}}" alt="" height="50" width="50"></div>
           <h6>{{college_one.name}}, {{college_one.city}},<br>{{college_one.state}}</h6>
         </div>
         `;
@@ -316,7 +316,7 @@
           <button type="button" class="close" onclick="closeFun(this);" data-dismiss="modal" aria-label="Close" data-count="college_two">
             <span aria-hidden="true">×</span>
           </button>
-          <div class="pb-3"><img src="{% static 'website/images/logo.png' %}" alt="" height="50" width="50"></div>
+          <div class="pb-3"><img src="{{college_two.logo.url}}" alt="" height="50" width="50"></div>
           <h6>{{college_two.name}}, {{college_two.city}},<br>{{college_two.state}}</h6>
         </div>
         `;
@@ -327,7 +327,7 @@
           <button type="button" class="close" onclick="closeFun(this);" data-dismiss="modal" aria-label="Close" data-count="college_three">
             <span aria-hidden="true">×</span>
           </button>
-          <div class="pb-3"><img src="{% static 'website/images/logo.png' %}" alt="" height="50" width="50"></div>
+          <div class="pb-3"><img src="{{college_three.logo.url}}" alt="" height="50" width="50"></div>
           <h6>{{college_three.name}}, {{college_three.city}},<br>{{college_three.state}}</h6>
         </div>
         `;
@@ -338,7 +338,7 @@
           <button type="button" class="close" onclick="closeFun(this);" data-dismiss="modal" aria-label="Close" data-count="college_four">
             <span aria-hidden="true">×</span>
           </button>
-          <div class="pb-3"><img src="{% static 'website/images/logo.png' %}" alt="" height="50" width="50"></div>
+          <div class="pb-3"><img src="{{college_four.logo.url}}" alt="" height="50" width="50"></div>
           <h6>{{college_four.name}}, {{college_four.city}},<br>{{college_four.state}}</h6>
         </div>
         `;

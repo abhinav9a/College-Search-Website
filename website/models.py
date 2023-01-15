@@ -156,7 +156,7 @@ class College(models.Model):
 
     @property
     def avg_rating(self):
-        return round(self.reviews.all().aggregate(Avg('ratings')).get('ratings__avg'), 1)
+        return round(self.reviews.all().aggregate(Avg('ratings')).get('ratings__avg') or 0, 1)
 
 
 class Review(models.Model):

@@ -18,6 +18,7 @@ from django.urls import path, include, re_path
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
 
 from django.contrib.auth import views
 from website.forms import EmailValidationOnForgotPassword
@@ -26,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    re_path(r'^uploads/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 
     path('password_change/', views.PasswordChangeView.as_view(), name='password_change'),
     path('password_change/done/', views.PasswordChangeDoneView.as_view(), name='password_change_done'),

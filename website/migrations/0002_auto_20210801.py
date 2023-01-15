@@ -51,6 +51,7 @@ def initializeDB(apps, schema_editor):
         facilitiesList.append(Facility(name=facility))
 
     Stream.objects.bulk_create(streamsList)
+    Facility.objects.bulk_create(facilitiesList)
 
 
 class Migration(migrations.Migration):

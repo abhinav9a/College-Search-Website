@@ -14,7 +14,6 @@ import os
 from dotenv import load_dotenv
 
 from django.http import request
-import django_heroku
 from pathlib import Path
 
 load_dotenv()
@@ -66,7 +65,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
 ]
-SITE_ID = int(os.environ.get("SITE_ID"))
+SITE_ID = int(os.environ.get("SITE_ID") or 1)
 
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -289,6 +288,3 @@ LOGGING = {
         },
     }
 }
-
-# Heroku Deployment
-django_heroku.settings(locals())
